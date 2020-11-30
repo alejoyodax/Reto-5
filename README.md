@@ -1,2 +1,2 @@
 # MinticGit
-qwe
+Puerba de repositorio
