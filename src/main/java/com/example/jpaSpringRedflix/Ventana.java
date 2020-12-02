@@ -55,9 +55,9 @@ public class Ventana extends javax.swing.JFrame {
 
         System.out.println("------------------------------");
         System.out.println(user.toString());    //imprimo en consola el objeto usuario
-        System.out.println("------------------------------");
+        System.out.println("\n");
         repoU.save(user);
-        System.out.println("Usuario \"" + us_alias + "\" agregado con éxito");
+        System.out.println(">> Usuario \"" + us_alias + "\" agregado con éxito");
         aviso.setText("Usuario \"" + us_alias + "\" agregado con éxito"); // aviso es el nombre de una etiqueta en la ventana, esta la puse para mostrar mensajes de error o etcétera
         System.out.println("------------------------------");
 
@@ -102,7 +102,7 @@ public class Ventana extends javax.swing.JFrame {
                 provisional = consulta.get();                   //asignamos el valor de consulta a provisional, que es una instancia de USuario con los valores extraidos de la tabla usuario en base al id
             }
 
-            out.setText("Cambios realizados\n"          // se muestran en pantalla los | datos en la base de datos --> datos ingresados |
+            out.setText("Cambios realizados\n" // se muestran en pantalla los | datos en la base de datos --> datos ingresados |
                     + "Alias: " + id + "\n"
                     + "Nombre: " + provisional.getNombre() + " --> " + us_nombre + "\n"
                     + "Apellido: " + provisional.getApellido() + " --> " + us_apellido + "\n"
@@ -113,13 +113,13 @@ public class Ventana extends javax.swing.JFrame {
         }
         // #####################################################################################
 
-        System.out.println("------------------------------");
+        
         System.out.println(user.toString());    //imprimo en consola el objeto usuario
-        System.out.println("------------------------------");
+        System.out.println("\n");
         repoU.save(user);
         System.out.println("Usuario \"" + us_alias + "\" actualizado con éxito");
-        aviso.setText("Usuario \"" + us_alias + "\" actualizado con éxito"); // aviso es el nombre de una etiqueta en la ventana, esta la puse para mostrar mensajes de error o etcétera
-        System.out.println("------------------------------");
+        aviso.setText(">> Usuario \"" + us_alias + "\" actualizado con éxito"); // aviso es el nombre de una etiqueta en la ventana, esta la puse para mostrar mensajes de error o etcétera
+        System.out.println("----------------------------------------");
 
         // con este código establecemos los campos de texto en blanco
         texto_apellido.setText("");
@@ -164,6 +164,7 @@ public class Ventana extends javax.swing.JFrame {
         texto_celular = new javax.swing.JTextField();
         label_celular = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
 
         GrupoCRUD.add(b1);
         GrupoCRUD.add(b2);
@@ -183,7 +184,7 @@ public class Ventana extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 100, 60));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 100, 50));
 
         label_nombre.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label_nombre.setText("Nombre");
@@ -224,8 +225,8 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1.add(label_alias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel4.setText("Creación usuario Redflix");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 230, 30));
+        jLabel4.setText("TABLA USUARIO - REFLIX");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 250, 30));
 
         out.setColumns(20);
         out.setRows(5);
@@ -286,25 +287,20 @@ public class Ventana extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(b2))
-                            .addComponent(b1))
-                        .addGap(17, 17, 17)
-                        .addComponent(b4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(b3)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addComponent(b1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(b2)
+                .addGap(18, 18, 18)
+                .addComponent(b3)
+                .addGap(18, 18, 18)
+                .addComponent(b4)
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 100, 120));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 100, 180));
 
         aviso.setText(">>");
-        jPanel1.add(aviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 230, 20));
+        jPanel1.add(aviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 230, 30));
 
         label_contraseña.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label_contraseña.setText("Contraseña");
@@ -337,10 +333,25 @@ public class Ventana extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
+            .addGap(0, 228, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 260, 240));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 260, 250));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 256, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 46, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -371,7 +382,7 @@ public class Ventana extends javax.swing.JFrame {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // CREAR
         if ("create".equals(CRUD)) {          // si se seleccionó la opción CREATE
-            System.out.println("CRUD CREATE");            // mostramos por consola la acción a realizar
+            System.out.println("# CREATE");            // mostramos por consola la acción a realizar
             if (!"".equals(texto_id.getText())) {         // solo si el campo del id no esta vacío, realizamos todo lo demás
                 String us_alias = texto_id.getText();
                 if (!repoU.existsById(us_alias)) {                          // si no existe el usuario (id) en la tabla usuarios
@@ -405,7 +416,7 @@ public class Ventana extends javax.swing.JFrame {
 // LEER
         if ("read".equals(CRUD)) {
             System.out.println("------------------------------");
-            System.out.println("CRUD READ");            // mostramos por consola la acción a realizar
+            System.out.println("# READ");            // mostramos por consola la acción a realizar
             String us_alias = texto_id.getText();       //definimos una variable con los datos del campo de texto id
             if (repoU.existsById(us_alias)) {           // preguntamos si el id existe en la BD                
 
@@ -432,7 +443,7 @@ public class Ventana extends javax.swing.JFrame {
 // ACTUALIZAR
         if ("update".equals(CRUD)) {
             System.out.println("------------------------------");
-            System.out.println("CRUD UPDATE");
+            System.out.println("# UPDATE");
 
             if (!"".equals(texto_id.getText())) {         // solo si el campo del id no esta vacío, realizamos todo lo demás
                 String us_alias = texto_id.getText();
@@ -459,6 +470,52 @@ public class Ventana extends javax.swing.JFrame {
 
                 }
 
+            }
+
+        }
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// ELIMINAR
+        if ("delete".equals(CRUD)) {
+            System.out.println("------------------------------");
+            System.out.println("# DELETE");
+            if (!"".equals(texto_id.getText())) {         // solo si el campo del id no esta vacío, realizamos todo lo demás
+                String us_alias = texto_id.getText();
+                if (repoU.existsById(us_alias)) {
+
+                    //Esta parte del código, nos va a mostrar los datos del usuario que eliminamos, en el textArea llamado out
+                    //##############################################################
+                    Optional<Usuario> consulta = repoU.findById(us_alias);  //creamos un Usuario de tipo Optional
+                    Usuario provisional = new Usuario();                                    //creamos un usuario de nombre provisional
+
+                    if (consulta.isPresent()) {                               //preguntamos si el valor de "consulta" está presente
+                        provisional = consulta.get();                   //asignamos el valor de consulta a provisional, que es una instancia de USuario con los valores extraidos de la tabla usuario en base al id
+                    }
+
+                    out.setText("Usuario eliminado: \n" // se muestran en pantalla los | datos en la base de datos --> datos ingresados |
+                            + "Alias: " + us_alias + "\n"
+                            + "Nombre: " + provisional.getNombre() + "\n"
+                            + "Apellido: " + provisional.getApellido() +  "\n"
+                            + "Contraseña: " + provisional.getPassword() + "\n"
+                            + "Email: " + provisional.getEmail() +   "\n"
+                            + "Celular: " + provisional.getCelular()
+                    );
+                    //#############################################################
+                    
+                    repoU.deleteById(us_alias); //Eliminamos el registro por el id
+                    aviso.setText("El regitro " + us_alias + " se ha eliminado correctamente");
+                    System.out.println("El regitro " + us_alias + " se ha eliminado correctamente");
+
+                    System.out.println("------------------------------");
+                    texto_id.setText("");
+                }else{
+                    aviso.setText("El regitro " + us_alias + " no existe");
+                    System.out.println("El regitro " + us_alias + " no existe");
+                }
+
+            } else {
+                aviso.setText("Ingrese el alias a eliminar");
+                System.out.println("Ingrese el alias a eliminar");
             }
 
         }
@@ -549,7 +606,7 @@ public class Ventana extends javax.swing.JFrame {
         texto_email.setVisible(false);
         label_celular.setVisible(false);
         texto_celular.setVisible(false);
-        
+
         //System.out.println(CRUD);
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -608,6 +665,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_alias;
     private javax.swing.JLabel label_apellido;

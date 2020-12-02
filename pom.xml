@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>jpaSpringRedflix</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jpaSpringRedflix</name>
+	<name>CRUD REDFLIX</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
