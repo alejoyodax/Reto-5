@@ -38,14 +38,8 @@ public class MyRunner implements CommandLineRunner { // La clase MyRunner hereda
         //repo.save(user); 
         
         
-        if (repo.existsById("alejoyodax")){
-            System.out.println("\n");
-            System.out.println("Si existe el usuario alejoyodax");
-        }else{
-            System.out.println("No existe el usuario alejoyodax");
-        }
-        
-// para agregar el nuevo Usuario user en la base de datos
+                
+    // para agregar el nuevo Usuario user en la base de datos
         //String aBorrar = "alejoyodax";    
         //repo.delete(new Usuario("alejoyodax" , "sd")); //función para borrar por id. Es necesario crear un constructor con solo los atributos id para poder crear una instancia con solo esos atributos
         

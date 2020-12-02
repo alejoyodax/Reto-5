@@ -1,0 +1,31 @@
+CRUD REDFLIX
+
+La aplicación agrega por ahora usuarios, no está excenta de errores pero cumple primitivamente su función
+---------------------------------------
+
+A continuación el código SQL (sin los guiones) para crear la base de datos que usará la aplicación :
+
+-----------------------------------------
+create SCHEMA redflix;
+use redflix;
+
+CREATE TABLE usuario(
+	`usr_alias`	VARCHAR(20),
+    `usr_nombres`	VARCHAR(30),
+    `usr_apellidos` VARCHAR(30),
+    `usr_email` 	VARCHAR(30),
+    `usr_celular` 	bigint,
+    `usr_contraseña` VARCHAR(30),
+    `usr_fecha_nacimiento` datetime(6),
+     PRIMARY KEY (usr_alias)
+	);
+--------------------------------------------
+
+La datos de la configuración de la base de datos son los siquientes:
+-----------------------------------------------------------------------------
+spring.datasource.url=jdbc:mysql://localhost:3306/redflix?serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=root
+------------------------------------------------------------------------------
+Como ven, el usuario y contraseña están por defecto, deberan escribir los suyos si han creado unos distintos
+

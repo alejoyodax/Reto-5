@@ -8,13 +8,14 @@ import java.math.BigInteger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author alejo
  */
 @Entity
-//Table(name="usuario")
+@Table(name="usuario")
 public class Usuario {
     
     @Id
@@ -43,12 +44,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    
+        
     public Usuario(String id, String nombre, String apellido, String email, Long celular, String password, String fecha) {
         this.id = id;
         this.nombre = nombre;
@@ -77,7 +73,36 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + '}' + "\n";
+        return "Usuario\n"
+                + "id: " + id + "\n"
+                + "nombre: " + nombre + "\n"
+                + "apellido: " + apellido + "\n"
+                + "email: " + email + "\n"
+                + "celular: " + celular + "\n"
+                + "password: " + password + "\n"
+                + "fecha: " + fecha;
+    }
+
+    
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCelular(Long celular) {
+        this.celular = celular;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
     
     
