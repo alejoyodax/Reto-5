@@ -73,6 +73,66 @@ public class Ventana extends javax.swing.JFrame {
         out.setText("Detalles de datos ingresados: \n" + user.toString());
     }
 
+    private void actualizarUsuario() {
+        String us_alias = texto_id.getText();       // asignamos los datos de los textfiels a variables
+        String us_nombre = texto_nombre.getText();
+        String us_apellido = texto_apellido.getText();
+        String us_contraseña = texto_contraseña.getText();
+        String us_contraseña2 = texto_contraseña2.getText();
+        String us_email = texto_email.getText();
+        Long us_celular = Long.parseLong(texto_celular.getText());
+
+        Usuario user = new Usuario();   //creamos una instancia de la clase Usuario, que será el usuario con los datos que ingresamos
+        user.setId(us_alias);           // asignamos los valores a el usuario que creamos
+        user.setNombre(us_nombre);
+        user.setApellido(us_apellido);
+        user.setEmail(us_email);
+        user.setCelular(us_celular);
+        user.setPassword(us_contraseña);
+        user.setFecha("1997-04-09");    // asigno una fecha predefenida (string) solo para ahorrar tiempo
+
+        //#############################################################################################
+        // esta parte del código muestra los datos ingresados y los que se modificaron
+        String id = texto_id.getText();
+        if (repoU.existsById(id)) {
+            Optional<Usuario> consulta = repoU.findById(id);  //creamos un Usuario de tipo Optional
+            Usuario provisional = new Usuario();                                    //creamos un usuario de nombre provisional
+
+            if (consulta.isPresent()) {                               //preguntamos si el valor de "consulta" está presente
+                provisional = consulta.get();                   //asignamos el valor de consulta a provisional, que es una instancia de USuario con los valores extraidos de la tabla usuario en base al id
+            }
+
+            out.setText("Cambios realizados\n"          // se muestran en pantalla los | datos en la base de datos --> datos ingresados |
+                    + "Alias: " + id + "\n"
+                    + "Nombre: " + provisional.getNombre() + " --> " + us_nombre + "\n"
+                    + "Apellido: " + provisional.getApellido() + " --> " + us_apellido + "\n"
+                    + "Contraseña: " + provisional.getPassword() + " --> " + us_contraseña + "\n"
+                    + "Email: " + provisional.getEmail() + " --> " + us_email + "\n"
+                    + "Celular: " + provisional.getCelular() + " --> " + us_celular
+            );
+        }
+        // #####################################################################################
+
+        System.out.println("------------------------------");
+        System.out.println(user.toString());    //imprimo en consola el objeto usuario
+        System.out.println("------------------------------");
+        repoU.save(user);
+        System.out.println("Usuario \"" + us_alias + "\" actualizado con éxito");
+        aviso.setText("Usuario \"" + us_alias + "\" actualizado con éxito"); // aviso es el nombre de una etiqueta en la ventana, esta la puse para mostrar mensajes de error o etcétera
+        System.out.println("------------------------------");
+
+        // con este código establecemos los campos de texto en blanco
+        texto_apellido.setText("");
+        texto_celular.setText("");
+        texto_id.setText("");
+        texto_contraseña.setText("");
+        texto_contraseña2.setText("");
+        texto_email.setText("");
+        texto_nombre.setText("");
+
+        //out.setText("Detalles de datos actualizados: \n" + user.toString());
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,7 +183,7 @@ public class Ventana extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 100, 110));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 100, 60));
 
         label_nombre.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label_nombre.setText("Nombre");
@@ -348,22 +408,57 @@ public class Ventana extends javax.swing.JFrame {
             System.out.println("CRUD READ");            // mostramos por consola la acción a realizar
             String us_alias = texto_id.getText();       //definimos una variable con los datos del campo de texto id
             if (repoU.existsById(us_alias)) {           // preguntamos si el id existe en la BD                
-                
+
                 Optional<Usuario> consulta = repoU.findById(us_alias);  //creamos un Usuario de tipo Optional
                 Usuario provisional;                                    //creamos un usuario de nombre provisional
-                
-                if(consulta.isPresent()){                               //preguntamos si el valor de "consulta" está presente
+
+                if (consulta.isPresent()) {                               //preguntamos si el valor de "consulta" está presente
                     provisional = consulta.get();                       //asignamos el valor de consulta a provisional, que es una instancia de USuario con los valores extraidos de la tabla usuario en base al id
                     System.out.println(provisional.toString());         // imprimimos los datos del objeto provisional
-                    
+
                     out.setText(provisional.toString());                // imprimo pero en el cajón visual de la ventana
-                     System.out.println("------------------------------");
+                    System.out.println("------------------------------");
                 }
-                
-            }else{
-                
+
+            } else {
+
                 System.out.println("El id \"" + us_alias + "\" no existe en la base de datos");
-                 System.out.println("------------------------------");
+                System.out.println("------------------------------");
+            }
+
+        }
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// ACTUALIZAR
+        if ("update".equals(CRUD)) {
+            System.out.println("------------------------------");
+            System.out.println("CRUD UPDATE");
+
+            if (!"".equals(texto_id.getText())) {         // solo si el campo del id no esta vacío, realizamos todo lo demás
+                String us_alias = texto_id.getText();
+                if (repoU.existsById(us_alias)) {                          // si no existe el usuario (id) en la tabla usuarios
+                    if (!"".equals(texto_nombre.getText())                 // si los campos de texto NO están vacíos
+                            && // si los campos no están vacíos
+                            !"".equals(texto_apellido.getText())
+                            && !"".equals(texto_email.getText())
+                            && !"".equals(texto_celular.getText())
+                            && !"".equals(texto_contraseña.getText())
+                            && !"".equals(texto_contraseña2.getText())) {
+
+                        actualizarUsuario();              //ejecuta el método para agregar usuario
+
+                    } else {
+                        aviso.setText("Verifique los datos ingresados");
+                        System.out.println("Verifique los datos ingresados");
+
+                    }
+
+                } else {
+                    aviso.setText("El usuario " + us_alias + " no existe");
+                    System.out.println("El usuario " + us_alias + " no existe"); //si el usuario (id) ya existe
+
+                }
+
             }
 
         }
@@ -373,6 +468,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
         // TODO add your handling code here:
+        aviso.setText("");
         CRUD = "create";
         label_alias.setVisible(true);
         texto_id.setVisible(true);
@@ -394,6 +490,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void b2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b2ActionPerformed
         // TODO add your handling code here:
+        aviso.setText("");
         CRUD = "read";
         label_alias.setVisible(true);
         texto_id.setVisible(true);
@@ -415,13 +512,44 @@ public class Ventana extends javax.swing.JFrame {
 
     private void b3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b3ActionPerformed
         // TODO add your handling code here:
+        aviso.setText("");
         CRUD = "update";
+        label_alias.setVisible(true);
+        texto_id.setVisible(true);
+        label_nombre.setVisible(true);
+        texto_nombre.setVisible(true);
+        label_apellido.setVisible(true);
+        texto_apellido.setVisible(true);
+        label_contraseña.setVisible(true);
+        texto_contraseña.setVisible(true);
+        label_contraseña2.setVisible(true);
+        texto_contraseña2.setVisible(true);
+        label_email.setVisible(true);
+        texto_email.setVisible(true);
+        label_celular.setVisible(true);
+        texto_celular.setVisible(true);
         //System.out.println(CRUD);
     }//GEN-LAST:event_b3ActionPerformed
 
     private void b4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b4ActionPerformed
         // TODO add your handling code here:
+        aviso.setText("");
         CRUD = "delete";
+        label_alias.setVisible(true);
+        texto_id.setVisible(true);
+        label_nombre.setVisible(false);
+        texto_nombre.setVisible(false);
+        label_apellido.setVisible(false);
+        texto_apellido.setVisible(false);
+        label_contraseña.setVisible(false);
+        texto_contraseña.setVisible(false);
+        label_contraseña2.setVisible(false);
+        texto_contraseña2.setVisible(false);
+        label_email.setVisible(false);
+        texto_email.setVisible(false);
+        label_celular.setVisible(false);
+        texto_celular.setVisible(false);
+        
         //System.out.println(CRUD);
     }//GEN-LAST:event_b4ActionPerformed
 

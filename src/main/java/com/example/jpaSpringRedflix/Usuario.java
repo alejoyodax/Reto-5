@@ -82,6 +82,26 @@ public class Usuario {
                 + "password: " + password;              
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Long getCelular() {
+        return celular;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
     
 
     public void setApellido(String apellido) {
