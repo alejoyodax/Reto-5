@@ -79,8 +79,7 @@ public class Usuario {
                 + "apellido: " + apellido + "\n"
                 + "email: " + email + "\n"
                 + "celular: " + celular + "\n"
-                + "password: " + password + "\n"
-                + "fecha: " + fecha;
+                + "password: " + password;              
     }
 
     
